@@ -114,6 +114,12 @@
     <Compile Include="controls\TreeViewEx.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="forms\frmImageBrowser\frmImageBrowser.Designer.vb">
+      <DependentUpon>frmImageBrowser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="forms\frmImageBrowser\frmImageBrowser.vb">
+      <SubType>form</SubType>
+    </Compile>
     <Compile Include="framework\arraylist\ArrayListEx.vb" />
     <Compile Include="framework\audibleAlarms\audibleAlarm.vb" />
     <Compile Include="framework\csv\csvStrings.vb" />
@@ -160,6 +166,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="forms\frmImageBrowser\frmImageBrowser.resx">
+      <DependentUpon>frmImageBrowser.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
