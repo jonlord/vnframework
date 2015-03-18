@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports System.Drawing
 Imports System.Data.Odbc
+Imports System.Data.OleDb
 Imports System.Data.SqlClient
 Imports System.Text.RegularExpressions
 
@@ -294,5 +295,45 @@ Public Class sqlserver
             logs.writeToErrorLog(ex.Message)
             Return False
         End Try
+    End Function
+
+    ''' <summary>
+    ''' Determines if a value exists in a field, excluding a particular record
+    ''' </summary>
+    ''' <param name="tableName">Table to search in</param>
+    ''' <param name="columnName">field to search in</param>
+    ''' <param name="value">Value to search for</param>
+    ''' <param name="primaryKey">Primary Key name</param>
+    ''' <param name="pkValue">Primary Key Value to exclude</param>
+    ''' <param name="cnx">Connection to use</param>
+    ''' <returns>True if it exists, false if it does not</returns>
+    Shared Function valueExists(ByVal tableName As String, ByVal columnName As String, value As String, primaryKey As String, pkValue As String, Optional cnx As OdbcConnection = Nothing) As Boolean
+        valueExists = False
+        Dim sql As String = String.Format("SELECT COUNT(*) FROM {0} WHERE {1} LIKE '{2}' AND {3} <> '{4}'", tableName, columnName, value, primaryKey, pkValue)
+        valueExists = (CInt(ExecuteScalar(sql, cnx)) > 0)
+    End Function
+
+    Shared Function backup(ByVal path As String, connection As OleDbConnection, Optional timeout As Integer = 15) As Boolean
+        Using connection
+            Try
+                Dim sShrink As String = String.Format("DUMP TRAN {0} WITH TRUNCATE_ONLY", connection.Database)
+                Dim sBackup As String = String.Format("BACKUP DATABASE {0} TO DISK = N'{1}' WITH NOFORMAT, INIT, NAME =N'{0}-Full Database Backup', SKIP, STATS=10", connection.Database, path)
+                Using cmdBackUp As New OleDbCommand(sShrink, connection)
+                    Try
+                        cmdBackUp.ExecuteNonQuery()
+                    Catch ex2 As Exception
+                        'Try to shrink, but don't mind if it does not
+                    End Try
+                    cmdBackUp.CommandText = sBackup
+                    cmdBackUp.CommandTimeout = timeout * 60
+                    cmdBackUp.ExecuteNonQuery()
+                End Using
+                connection.Close()
+                Return True
+            Catch ex As Exception
+                showError(ex.Message)
+                Return False
+            End Try
+        End Using
     End Function
 End Class

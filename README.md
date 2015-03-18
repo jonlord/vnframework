@@ -99,6 +99,7 @@ Includes:
  Gets the OleDB equivalent for a System.Type
  Makes database error messages user friendly
  Validates if and object is null; and sets a value to return if so
+ Determines if a value is already present on a table
 
 # stringEx
 Extension to .Net String Class allowing for additional functionality:

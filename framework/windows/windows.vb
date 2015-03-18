@@ -1,7 +1,42 @@
-﻿''' <summary>
+﻿Imports System.ServiceProcess
+
+''' <summary>
 ''' Collection of non-original functions to manage machine startup up and shutdown
 ''' </summary>
 Public Class WindowsOperations
+
+    ''' <summary>
+    ''' Start a windows service
+    ''' </summary>
+    ''' <param name="server">FQDN or IP of server to control</param>
+    ''' <param name="serviceName">Name of service to control</param>
+    ''' <returns>True if able to start; false if not</returns>
+    Shared Function startService(server As String, serviceName As String) As Boolean
+        Dim status As String  'Service status
+        Using mySC As ServiceController = New ServiceController(serviceName, server)
+            Try
+                'Save service status
+                status = mySC.Status.ToString
+                If status = "" Then Return False
+            Catch ex As Exception
+                showError(String.Format(ERRORSERVICENOTFOUND, ex.Message))
+                Return False
+            End Try
+            'If the service is stopped, try to start it
+            If mySC.Status.Equals(ServiceControllerStatus.Stopped) Or mySC.Status.Equals(ServiceControllerStatus.StopPending) Then
+                Try
+                    mySC.Start()
+                    'Wait for service to start
+                    mySC.WaitForStatus(ServiceControllerStatus.Running)
+                Catch ex As Exception
+                    'Report an error if not able to start
+                    showError(String.Format(ERRORSTARTINGSERVICE, ex.Message))
+                    Return False
+                End Try
+            End If
+        End Using
+        Return True
+    End Function
 
     ''' <summary>
     ''' Shuts down the computer

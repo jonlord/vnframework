@@ -26,4 +26,8 @@
     Public Const REPLACEMISSINGTABLE As String = "Su base de datos puede estar desactualizada. Favor proceda a actualizarla para obtener la tabla "
     Public Const REPLACEFIELDCOUNT0 As String = "Su base de datos puede estar desactualizada. Favor proceda a actualizarla para obtener los campos de la tabla "
     Public Const REPLACEFOREIGNKEYINSERT As String = "No se encuentran todos los registros necesarios en la tabla $4"
+
+    'Windows Services
+    Public Const ERRORSERVICENOTFOUND As String = "Servicio no encontrado; asegurese de que este instalado: {0}"
+    Public Const ERRORSTARTINGSERVICE As String = "Error al iniciar el servicio: {0}"
 End Module
