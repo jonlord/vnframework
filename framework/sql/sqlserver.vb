@@ -115,7 +115,6 @@ Public Class sqlserver
         cleanErrorCustom = errorMessage
     End Function
 
-
     ''' <summary>
     ''' Gets the column schema of a table by name
     ''' </summary>
@@ -313,6 +312,13 @@ Public Class sqlserver
         valueExists = (CInt(ExecuteScalar(sql, cnx)) > 0)
     End Function
 
+    ''' <summary>
+    ''' Executes a SQL Server Backup
+    ''' </summary>
+    ''' <param name="path">Path to sore backup at</param>
+    ''' <param name="connection">Connection to use</param>
+    ''' <param name="timeout">Timeout in minutes</param>
+    ''' <returns>True if successful, false if it fails</returns>
     Shared Function backup(ByVal path As String, connection As OleDbConnection, Optional timeout As Integer = 15) As Boolean
         Using connection
             Try
@@ -337,5 +343,85 @@ Public Class sqlserver
         End Using
     End Function
 
+    ''' <summary>
+    ''' Load a file to a field in a table
+    ''' </summary>
+    ''' <param name="path">Path to file</param>
+    ''' <param name="table">Name of table</param>
+    ''' <param name="field">Name of field</param>
+    ''' <param name="idField">Primary Key of Table</param>
+    ''' <param name="idValue">Value of primary key</param>
+    ''' <param name="connection">Connection to use</param>
+    ''' <returns>True if successful; false if it fails</returns>
+    Shared Function uploadFile(path As String, table As String, field As String, idField As String, idValue As String, connection As SqlConnection) As Boolean
+        uploadFile = False
+        Try
+            Dim sql As String = String.Format("UPDATE {0} SET {1}=@archivo WHERE {2}={3}", table, field, idField, idValue)
+            Dim ms As MemoryStream = New MemoryStream()
+            Dim fs As FileStream = New FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
 
+            ms.SetLength(fs.Length)
+            fs.Read(ms.GetBuffer(), 0, fs.Length)
+
+            Dim arrImg() As Byte = ms.GetBuffer()
+            ms.Flush()
+            fs.Close()
+
+            Using connection
+                Using cmd As SqlCommand = connection.CreateCommand()
+                    If connection.State <> ConnectionState.Open Then connection.Open()
+                    cmd.CommandText = sql
+                    cmd.Parameters.Add("@archivo", SqlDbType.VarBinary).Value = arrImg
+
+                    cmd.ExecuteNonQuery()
+                    uploadFile = True
+                End Using
+            End Using
+            ms.Close()
+            fs.Dispose()
+            ms.Dispose()
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Loads a file's contents to a table
+    ''' </summary>
+    ''' <param name="fileName">Name of file</param>
+    ''' <param name="tableName">Table Name</param>
+    ''' <param name="fields">Fields to load</param>
+    ''' <param name="condition">Connection to use</param>
+    ''' <returns>True if successful; false if it fails</returns>
+    Public Shared Function textFileToTable(fileName As String, tableName As String, fields As List(Of String), Optional condition As String = "1=1") As Boolean
+        textFileToTable = False
+        Try
+            Dim scampoid As String = ""
+            Dim scampos As String = ""
+            Dim scamposUpd As String = ""
+            Dim i As Integer = 0
+            For Each campo As String In fields
+                scampos &= IIf(scampos <> "", ",", "") & campo
+                If i = 0 Then
+                    scampoid = campo
+                Else
+                    scamposUpd &= IIf(scamposUpd <> "", ",", "") & campo & "= b." & campo
+                End If
+                i = 1
+            Next
+
+            Dim sql_arreglo As New List(Of String)
+            sql_arreglo.Add(String.Format("SELECT * INTO {0}_temp FROM {1} WHERE 1=2", "#" & tableName, tableName))
+            sql_arreglo.Add(String.Format("BULK INSERT {0}_temp FROM '{1}' WITH (FIELDTERMINATOR = '\t')", "#" & tableName, fileName))
+            sql_arreglo.Add(String.Format("INSERT INTO {0} ({1}) SELECT {1} FROM {4}_temp a WHERE (SELECT COUNT(*) FROM {0} b WHERE a.{2}=b.{2}) = 0 AND {3}", tableName, scampos, scampoid, condition, "#" & tableName))
+            sql_arreglo.Add(String.Format("UPDATE {0} SET {1} FROM {0} a, {3}_temp b WHERE a.{2}=b.{2}", tableName, scamposUpd, scampoid, "#" & tableName))
+            sql_arreglo.Add(String.Format("DROP TABLE {0}_temp", "#" & tableName))
+
+            If procedure(sql_arreglo) = 1 Then _
+                textFileToTable = True
+        Catch ex As Exception
+            showError(ex.Message)
+            logs.writeToErrorLog(ex.Message)
+        End Try
+    End Function
 End Class

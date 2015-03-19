@@ -132,8 +132,13 @@
     <Compile Include="framework\file\files.vb" />
     <Compile Include="framework\fonts\fonts.vb" />
     <Compile Include="framework\ftp\ftp.vb" />
+    <Compile Include="framework\httpServer\httpServer.vb" />
+    <Compile Include="framework\http\urlAction.vb" />
     <Compile Include="framework\ip\ip.vb" />
     <Compile Include="framework\logs\logs.vb" />
+    <Compile Include="framework\gdi\GdiPlusLib.vb" />
+    <Compile Include="framework\twain\TwainDefs.vb" />
+    <Compile Include="framework\twain\TwainLib.vb" />
     <Compile Include="framework\pdf\pdfs.vb" />
     <Compile Include="framework\randoms\randomStrings.vb" />
     <Compile Include="framework\registry\registry.vb" />
@@ -177,6 +182,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="CHANGELOG.md" />
+    <None Include="framework\twain\README.md" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

@@ -1,4 +1,7 @@
 ﻿Public Module literals
+    'General usage
+    Public Const SAVEAS As String = "Salvar como ..."
+
     'User Messages
     Public Const ERRORLOADINGDATA As String = "Error al cargar datos: "
     Public Const ERRORSAVE As String = "Hubo un error al salvar el registro. Favor reintente. Puede obtener más detalles en la bitácora de errores"
@@ -30,4 +33,11 @@
     'Windows Services
     Public Const ERRORSERVICENOTFOUND As String = "Servicio no encontrado; asegurese de que este instalado: {0}"
     Public Const ERRORSTARTINGSERVICE As String = "Error al iniciar el servicio: {0}"
+
+    'HTTP Server
+    Public Const HTTPSYSTEMREQUIREMENTS As String = "Windows XP SP2, Server 2003, o superiro higher es requerido para utilizar HTTP Listener."
+    Public Const HTTPMETHODNOTFOUND As String = "El metodo no fue encontrado"
+
+    'GDI
+    Public Const GDIUNKNOWNFORMAT As String = "Formato desconocido: "
 End Module
