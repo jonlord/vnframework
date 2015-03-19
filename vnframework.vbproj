@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>D:\build\classes\</OutputPath>
     <DocumentationFile>vnframework.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
@@ -46,10 +46,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AWSSDK">
-      <HintPath>..\dlls\AWSSDK.dll</HintPath>
+      <HintPath>..\fa\_publish\sincronizador\AWSSDK.dll</HintPath>
     </Reference>
     <Reference Include="itextsharp">
-      <HintPath>..\dlls\itextsharp.dll</HintPath>
+      <HintPath>..\fa\classes\classes\bin\Debug\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=6.9.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -57,7 +57,7 @@
     </Reference>
     <Reference Include="Org.Mentalis.Security, Version=1.0.13.715, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\dlls\Org.Mentalis.Security.dll</HintPath>
+      <HintPath>..\fa\_publish\procesos\Org.Mentalis.Security.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -69,7 +69,7 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Tamir.SharpSSH">
-      <HintPath>..\dlls\Tamir.SharpSSH.dll</HintPath>
+      <HintPath>..\fa\_shared.developers\dlls\Tamir.SharpSSH.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -134,8 +134,13 @@
     <Compile Include="framework\file\files.vb" />
     <Compile Include="framework\fonts\fonts.vb" />
     <Compile Include="framework\ftp\ftp.vb" />
+    <Compile Include="framework\httpServer\httpServer.vb" />
+    <Compile Include="framework\http\urlAction.vb" />
     <Compile Include="framework\ip\ip.vb" />
     <Compile Include="framework\logs\logs.vb" />
+    <Compile Include="framework\gdi\GdiPlusLib.vb" />
+    <Compile Include="framework\twain\TwainDefs.vb" />
+    <Compile Include="framework\twain\TwainLib.vb" />
     <Compile Include="framework\pdf\pdfs.vb" />
     <Compile Include="framework\randoms\randomStrings.vb" />
     <Compile Include="framework\registry\registry.vb" />
@@ -179,6 +184,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="CHANGELOG.md" />
+    <None Include="framework\twain\README.md" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

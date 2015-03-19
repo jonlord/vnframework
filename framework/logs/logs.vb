@@ -1,6 +1,6 @@
 ﻿Public Class logs
     ''' <summary>
-    ''' 
+    '''
     ''' </summary>
     ''' <param name="msg">Message to write</param>
     Public Shared Sub writeToLog(msg As String)
@@ -8,7 +8,7 @@
     End Sub
 
     ''' <summary>
-    ''' 
+    '''
     ''' </summary>
     ''' <param name="msg">Message to write</param>
     Public Shared Sub writeToErrorLog(msg As String)

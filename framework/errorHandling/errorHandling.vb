@@ -1,7 +1,7 @@
 ﻿Imports System.Windows.Forms
 
 ''' <summary>
-''' Error Handling manipulation library to facilitate showing errors to the user 
+''' Error Handling manipulation library to facilitate showing errors to the user
 ''' </summary>
 Public Module errorHandling
     ''' <summary>

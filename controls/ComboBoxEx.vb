@@ -29,7 +29,7 @@ Public Class ComboBoxEx
                     connection = getGlobalConnection()
                 If value.Length > 0 Then _
                         populate(value, connection, selectFirst)
-                End If
+            End If
             _sql = value
         End Set
     End Property

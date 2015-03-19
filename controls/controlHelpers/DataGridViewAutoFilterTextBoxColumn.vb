@@ -14,7 +14,6 @@ Imports System.Windows.Forms
 Imports System.ComponentModel
 Imports vnframework
 
-
 ''' <summary>
 ''' Represents a DataGridViewTextBoxColumn with a drop-down filter list accessible from the header cell.
 ''' </summary>

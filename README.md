@@ -45,6 +45,15 @@ Font helper library for .Net
 # ftp
 FTP Connection Library
 
+# gdiPlus
+A GDI Plus helper library
+
+# http
+Allows for easier handling of URL's and their action
+
+# httpServer
+A http response server that's able to call internal functions
+
 # ipLibrary
 IP Address manipulation Library for .Net
 
