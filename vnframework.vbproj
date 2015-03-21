@@ -128,6 +128,7 @@
     <Compile Include="framework\email\emails.vb" />
     <Compile Include="framework\enum\enums.vb" />
     <Compile Include="framework\errorHandling\errorHandling.vb" />
+    <Compile Include="framework\eventlog\eventLog.vb" />
     <Compile Include="framework\excel\excel.vb" />
     <Compile Include="framework\file\files.vb" />
     <Compile Include="framework\fonts\fonts.vb" />
@@ -195,7 +196,9 @@
     </None>
     <None Include="README.md" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="modules\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

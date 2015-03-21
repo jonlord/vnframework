@@ -5,6 +5,7 @@
 ''' </summary>
 Public Class windowsRegistry
     Private SubKeyName As String
+    Public Property hive As RegistryHive = RegistryHive.CurrentUser
 
     ''' <summary>
     ''' Initiates a registry object selecting a subkey to use
@@ -21,6 +22,7 @@ Public Class windowsRegistry
     Public Sub setSubKey(Optional ByVal subKeyName As String = "SOFTWARE\")
         Me.SubKeyName = subKeyName
     End Sub
+
     ''' <summary>
     ''' Writes a value to the registry
     ''' </summary>
@@ -28,11 +30,10 @@ Public Class windowsRegistry
     ''' <param name="value">Value to write</param>
     ''' <returns>True if successfull or false if an error occurs</returns>
     Public Function WriteToRegistry(ByVal subKey As String, ByVal value As Object) As Boolean
-        Dim ParentKeyHive As RegistryHive = RegistryHive.CurrentUser
         Dim objSubKey As RegistryKey
         Dim objParentKey As RegistryKey = Nothing
         Try
-            Select Case ParentKeyHive
+            Select Case hive
                 Case RegistryHive.ClassesRoot
                     objParentKey = Registry.ClassesRoot
                 Case RegistryHive.CurrentConfig
@@ -69,7 +70,6 @@ Public Class windowsRegistry
     ''' <param name="defaultValue">Value to return if the subkey is not found or an error occurs</param>
     ''' <returns>Value of SubKey of defaultValue if error or nor found</returns>
     Public Function GetFromRegistry(ByVal subKey As String, Optional ByRef defaultValue As String = "") As String
-        Dim Hive As RegistryHive = RegistryHive.CurrentUser
         Dim objParent As RegistryKey = Nothing
         Dim objSubkey As RegistryKey
         Select Case Hive

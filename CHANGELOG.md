@@ -1,6 +1,10 @@
 ﻿# Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.3] - 2015-03-20
+### Added
+ - Event Log Writer
+
 ## [0.2] - 2015-03-19
 ### Added
 - Changelog file

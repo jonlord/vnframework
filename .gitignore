@@ -185,3 +185,4 @@ FakesAssemblies/
 #Custom ignores
 .dropbox
 desktop.ini
+*.vbproj
