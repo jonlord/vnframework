@@ -80,4 +80,47 @@ Public Module StringEx
         Next i
         Return sb.ToString()
     End Function
+
+    ''' <summary>
+    ''' Converts a string to title case
+    ''' </summary>
+    ''' <param name="str">String to convert</param>
+    ''' <returns>The string applying title case</returns>
+    Public Function toTitleCase(ByVal str As String) As String
+        str = Trim(str).ToLower
+        If str = "" Then Return str
+
+        Dim fCapitalizeNextLetter As Boolean = True
+        Dim newStr As String = ""
+        Dim sChar
+
+        For i As Integer = 1 To Len(str)
+            sChar = Mid(str, i, 1)
+            If fCapitalizeNextLetter Then
+                If isLetter(sChar) Then
+                    sChar = UCase(sChar)
+                    fCapitalizeNextLetter = False
+                Else
+                    fCapitalizeNextLetter = True
+                End If
+            Else
+                If Not isLetter(sChar) Then fCapitalizeNextLetter = True
+            End If
+            newStr = newStr & sChar
+        Next
+        Return newStr
+    End Function
+    ''' <summary>
+    ''' Determines if a character is a letter
+    ''' </summary>
+    ''' <param name="sChar">Character to test</param>
+    ''' <returns>True if it is a letter, false if it is not</returns>
+    Function isLetter(ByVal sChar As String) As Boolean
+        isLetter = False
+        Dim nASCII As Integer = Asc(sChar)
+        If ((nASCII >= 65) And (nASCII <= 90)) Then isLetter = True ' Upper case letters
+        If ((nASCII >= 97) And (nASCII <= 122)) Then isLetter = True ' Lower case letters
+        If nASCII = 241 Or nASCII = 225 Or nASCII = 233 Or nASCII = 237 Or nASCII = 250 Then isLetter = True 'ñ á é í ú
+    End Function
+
 End Module

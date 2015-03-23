@@ -1,6 +1,26 @@
 ﻿# Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.5] - 2015-03-23  
+### Added  
+ - Added function to transfer data from one sqlserver connection to another
+
+## [0.4] - 2015-03-23  
+### Added  
+ - Function that extracts the Month Name from a numeric month  
+ - Function that extracts the date as a string from a DateTimePicker  
+ - Function that extracts the time as a string from a Date  
+ - Function that extracts the date as a string from a DateTimePicker  
+ - Function that determines if a character is a letter  
+ - Function that converts a string to title case  
+ - Function that gets the path of the current application  
+ - Function that gets the path to a special folder  
+ - A set of drawing functions  
+
+## [0.3] - 2015-03-20
+### Added
+ - Event Log Writer
+
 ## [0.2] - 2015-03-19
 ### Added
 - Changelog file

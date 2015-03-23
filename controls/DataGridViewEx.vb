@@ -2,6 +2,7 @@
 Imports System.Data.SqlClient
 Imports MySql.Data.MySqlClient
 Imports System.Windows.Forms
+Imports System.Drawing
 
 Public Class DatagridviewEx
     Inherits DataGridView

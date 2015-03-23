@@ -1,4 +1,5 @@
-﻿Imports System.ServiceProcess
+﻿Imports IWshRuntimeLibrary
+Imports System.ServiceProcess
 
 ''' <summary>
 ''' Collection of non-original functions to manage machine startup up and shutdown
@@ -81,6 +82,31 @@ Public Class WindowsOperations
         Catch ex As Exception
             Return False
         End Try
+    End Function
+
+    ''' <summary>
+    ''' Gets the path of the current application
+    ''' </summary>
+    ''' <returns>The path to the directory where the application resides</returns>
+    Public Function appPath() As String
+        Return AppDomain.CurrentDomain.BaseDirectory()
+    End Function
+
+    Private Declare Function SHGetSpecialFolderPath Lib "SHELL32.DLL" Alias "SHGetSpecialFolderPathA" (ByVal hWnd As Long, ByVal lpszPath As String, ByVal nFolder As Integer, ByVal fCreate As Boolean) As Boolean
+
+    ''' <summary>
+    ''' Get the path to a special folder
+    ''' </summary>
+    ''' <param name="folderName">Special folder name</param>
+    ''' <returns>Path to special folder</returns>
+    Public Function getSpecialFolderA(ByVal folderName As System.Environment.SpecialFolder) As String
+        Dim typeSpecialFolder As System.Environment.SpecialFolder
+        For Each typeSpecialFolder In typeSpecialFolder.GetValues(GetType(Environment.SpecialFolder))
+            If typeSpecialFolder = folderName Then
+                Return System.Environment.GetFolderPath(typeSpecialFolder)
+            End If
+        Next
+        Return ""
     End Function
 
     Private Declare Function GetCurrentProcess Lib "kernel32.dll" () As IntPtr
