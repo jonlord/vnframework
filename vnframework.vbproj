@@ -124,6 +124,8 @@
     <Compile Include="framework\audibleAlarms\audibleAlarm.vb" />
     <Compile Include="framework\csv\csvStrings.vb" />
     <Compile Include="framework\data\commandHelpers.vb" />
+    <Compile Include="framework\dates\dates.vb" />
+    <Compile Include="framework\drawing\drawing.vb" />
     <Compile Include="framework\dsn\dsn.vb" />
     <Compile Include="framework\email\emails.vb" />
     <Compile Include="framework\enum\enums.vb" />
@@ -196,9 +198,7 @@
     </None>
     <None Include="README.md" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="modules\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
