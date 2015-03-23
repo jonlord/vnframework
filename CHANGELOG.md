@@ -1,6 +1,10 @@
 ﻿# Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.5] - 2015-03-23  
+### Added  
+ - Added function to transfer data from one sqlserver connection to another
+
 ## [0.4] - 2015-03-23  
 ### Added  
  - Function that extracts the Month Name from a numeric month  
