@@ -1,6 +1,11 @@
 ﻿# Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.6] - 2015-03-24  
+### Added  
+ - User Messages  
+ - DrawGradient functions
+
 ## [0.5] - 2015-03-23  
 ### Added  
  - Added function to transfer data from one sqlserver connection to another

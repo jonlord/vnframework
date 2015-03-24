@@ -9,6 +9,8 @@
     Public Const ERRORDATANOTGENERATED As String = "Los datos no fueron generados"
     Public Const ERRORDUPLICATERECORD As String = "El registro se encuentra duplicado"
     Public Const MSGSUCCESSSAVE As String = "El registro ha sido salvado"
+    Public Const MSGPRINTRECORDS As String = "¿Confirma que se imprimirán {0} registros?"
+    Public Const ERRORPRINTING As String = "No se logro imprimir el registro, favor intente nuevamente"
 
     'Database related messages
     Public Const ERRROOLEDBTYPENOTFOUND As String = "El System.Type {0} no tiene un tipo OleDB compatible en el campo {1}"

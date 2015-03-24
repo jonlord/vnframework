@@ -16,7 +16,7 @@ Public Module drawingEx
         formGraphics.Dispose()
     End Sub
     Public Sub DrawFilledRectangle(ByVal control As Control, ByVal color As Color, ByVal fillColor As Color, ByVal x1 As Integer, ByVal y1 As Integer, ByVal x2 As Integer, ByVal y2 As Integer)
-        Dim myBrush As New System.Drawing.SolidBrush(fillColor)
+        Dim myBrush As New SolidBrush(fillColor)
         Dim formGraphics As System.Drawing.Graphics
         formGraphics = control.CreateGraphics()
         formGraphics.FillRectangle(myBrush, New Rectangle(x1, y1, x2, y2))
