@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 ### Added  
  - User Messages  
  - DrawGradient functions
+ - Changed AWS Library to use SecureString
+ - Added more locale string to help in syncronization functions 
 
 ## [0.5] - 2015-03-23  
 ### Added  

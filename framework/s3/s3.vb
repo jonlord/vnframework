@@ -1,6 +1,7 @@
 ﻿Imports Amazon.S3
 Imports Amazon.S3.Model
 Imports Amazon.S3.Transfer
+Imports System.Security
 
 ''' <summary>
 ''' Wrapper class to remove abstraction of S3 functions
@@ -20,8 +21,8 @@ Public Class s3Library
     ''' </summary>
     ''' <param name="accessKey">AWS Access Key</param>
     ''' <param name="secretKey">AWS Secret Key</param>
-    Public Sub New(accessKey As String, secretKey As String)
-        client = New AmazonS3Client(accessKey, secretKey)
+    Public Sub New(accessKey As SecureString, secretKey As SecureString)
+        client = New AmazonS3Client(accessKey.ToString, secretKey.ToString)
     End Sub
 
     ''' <summary>

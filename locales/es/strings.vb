@@ -12,14 +12,44 @@
     Public Const MSGPRINTRECORDS As String = "¿Confirma que se imprimirán {0} registros?"
     Public Const ERRORPRINTING As String = "No se logro imprimir el registro, favor intente nuevamente"
 
-    'Database related messages
+    'Database related errors
     Public Const ERRROOLEDBTYPENOTFOUND As String = "El System.Type {0} no tiene un tipo OleDB compatible en el campo {1}"
     Public Const ERRROMYSQLTYPENOTFOUND As String = "El System.Type {0} no tiene un tipo MySQL compatible en el campo {1}"
+    Public Const ERROR_NO_ID_FIELDS As String = "No se ha definido la llave principal para la tabla: "
+    Public Const ERROR_CONNECT As String = "Error al abrir conexion a base de datos"
+    Public Const ERROR_GET_DATA As String = "Error al recuperar registros remotos"
+    Public Const ERROR_GET_LOCAL_STRUCTURE As String = "Error al recuperar estructura de tabla"
+    Public Const ERROR_UPDATE_STATUS As String = "Error actualizando estado de "
+    Public Const ERROR_UPDATE As String = "Error al actualizar "
+    Public Const ERROR_LOAD_RECORD As String = "Error al descargar registro"
+    Public Const ERROR_LOAD_UPDATE As String = "Error al descargar actualización de registro"
+    Public Const ERROR_CONVERSION As String = "Error al convertir datos"
+
+    'Database related messages
+    Public Const MSG_GET_RECORDS As String = "Recuperando registros: "
+    Public Const MSG_INSERT_RECORD As String = "Cargando registro: "
+    Public Const MSG_UPDATE_RECORD As String = "Actualizando registro: "
+    Public Const MSG_CONNECT_DB As String = "Abriendo conexion a base de datos"
+    Public Const MSG_GET_DATA As String = "Recuperando registros remotos"
+    Public Const MSG_GET_STATUS As String = "Recuperando estado de "
+    Public Const MSG_GET_STRUCTURE As String = "Recuperando estructura de "
+    Public Const MSG_UPDATE_STATUS As String = "Actualizando estado de "
+    Public Const MSG_PROCESS_RECORD As String = "Procesando registro "
+    Public Const MSG_GET_INDEX As String = "Obteniendo indice de sincronización"
+    Public Const MSG_GET_FIELDS As String = "Construyendo listado de campos"
+    Public Const MSG_GET_PARAMETERS As String = "Construyendo listado de parametros"
+    Public Const MSG_GET_CONDITIONS As String = "Construyendo listado de condiciones"
+    Public Const MSG_GET_COMMAND As String = "Construyendo comando de listado de condiciones"
 
     'SFTP Related Messaged
     Public Const ERRORUPLADINGFILE As String = "Error al cargar archivo: {0}"
     Public Const ERRORDOWNLOADINGFILE As String = "Error al descargar archivo: {0}"
     Public Const ERRORGETDIRECTORYLIST As String = "Error al recuperar listado de directorio {0}"
+
+    'SQL Server Errors
+    Public Const ERROR_SQL_CLIENT_NOT_INSTALLED As String = "No se encuentra instalado el cliente de SQL Server"
+    Public Const ERROR_SQL_CLIENT_INITIALIZATION As String = "No se logró iniciar el cliente de conexión. Si está utilizando SQL Server asegurese de tener instalado el Cliente de SQL: "
+
 
     'SQL Server Error Messaged replacements
     Public Const REPLACENULLFIELD As String = "No puede dejar el campo '$1' vacio"
@@ -71,4 +101,9 @@
 
     'Configuration Constants
     Public Const MAILESCAPE As String = "@." 'Represents no mail given
+
+    'Process Handling
+    Public Const WARN_MAX_RUNS As String = "Se alcanzó la máxima cantidad de ciclos para un proceso: "
+    Public Const MSG_CONNECT_REMOTE_DB As String = "Conectando a base de datos remota "
+    Public Const ERROR_CONNECT_REMOTE_DB As String = "Error al conectar a base de datos remota"
 End Module
