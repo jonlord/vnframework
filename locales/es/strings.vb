@@ -16,7 +16,7 @@
     Public Const ERRROOLEDBTYPENOTFOUND As String = "El System.Type {0} no tiene un tipo OleDB compatible en el campo {1}"
     Public Const ERRROMYSQLTYPENOTFOUND As String = "El System.Type {0} no tiene un tipo MySQL compatible en el campo {1}"
     Public Const ERROR_NO_ID_FIELDS As String = "No se ha definido la llave principal para la tabla: "
-    Public Const ERROR_CONNECT As String = "Error al abrir conexion a base de datos"
+    Public Const ERROR_CONNECT As String = "Error al abrir conexión a base de datos: "
     Public Const ERROR_GET_DATA As String = "Error al recuperar registros remotos"
     Public Const ERROR_GET_LOCAL_STRUCTURE As String = "Error al recuperar estructura de tabla"
     Public Const ERROR_UPDATE_STATUS As String = "Error actualizando estado de "
@@ -49,6 +49,8 @@
     'SQL Server Errors
     Public Const ERROR_SQL_CLIENT_NOT_INSTALLED As String = "No se encuentra instalado el cliente de SQL Server"
     Public Const ERROR_SQL_CLIENT_INITIALIZATION As String = "No se logró iniciar el cliente de conexión. Si está utilizando SQL Server asegurese de tener instalado el Cliente de SQL: "
+    Public Const ERROR_DATABASE_PARAMETER_NOT_SET As String = "Los parametros de conexion no han sido configurados: "
+
 
 
     'SQL Server Error Messaged replacements
