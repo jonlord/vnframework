@@ -26,6 +26,16 @@ Public Module commandHelpers
         logs.writeToLog(command.CommandText) 'This line is optional, I like having my queries "logged" someplace I can check for errors, for development purposes I use Debug.Print
         Return command.ExecuteReader
     End Function
+    ''' <summary>
+    ''' Execute a query against a database
+    ''' </summary>
+    ''' <param name="command">Command to use</param>
+    ''' <returns>Records affected</returns>
+    Function ExecuteNonQuery(ByVal command As OleDbCommand) As Integer
+        command.CommandText = sql.parseToSQLServer(command.CommandText) 'Let's make the query compatible with SQL Server
+        logs.writeToLog(command.CommandText) 'This line is optional, I like having my queries "logged" someplace I can check for errors, for development purposes I use Debug.Print
+        Return command.ExecuteNonQuery
+    End Function
 
     ''' <summary>
     ''' Execute a query against a database
@@ -162,46 +172,38 @@ Public Module commandHelpers
     ''' <summary>
     '''
     ''' </summary>
-    ''' <param name="SQL"></param>
+    ''' <param name="queries"></param>
     ''' <param name="cancelOnError"></param>
     ''' <param name="useTran"></param>
     ''' <param name="cnx"></param>
     ''' <returns></returns>
-    Public Function procedure(ByVal SQL As List(Of String), Optional ByVal cancelOnError As Boolean = True, Optional ByVal useTran As Boolean = True, Optional cnx As OdbcConnection = Nothing) As Integer
-        Dim sqlString(SQL.Count) As String
-        For i As Integer = 0 To SQL.Count - 1
-            sqlString(i) = SQL.Item(i)
-        Next
-        Return procedure(sqlString, cancelOnError, useTran, cnx)
+    Public Function procedure(ByVal queries As List(Of String), Optional ByVal cancelOnError As Boolean = True, Optional ByVal useTran As Boolean = True, Optional cnx As OdbcConnection = Nothing) As Integer
+        Return procedure(queries.ToArray, cancelOnError, useTran, cnx)
     End Function
     ''' <summary>
     '''
     ''' </summary>
-    ''' <param name="SQL"></param>
+    ''' <param name="queries"></param>
     ''' <param name="cancelOnError"></param>
     ''' <param name="useTran"></param>
     ''' <param name="cnx"></param>
     ''' <returns></returns>
-    Public Function procedure(ByVal SQL As ArrayList, Optional ByVal cancelOnError As Boolean = True, Optional ByVal useTran As Boolean = True, Optional cnx As OdbcConnection = Nothing) As Integer
-        Dim sqlString(SQL.Count) As String
-        For i As Integer = 0 To SQL.Count - 1
-            sqlString(i) = SQL.Item(i)
-        Next
-        Return procedure(sqlString, cancelOnError, useTran, cnx)
+    Public Function procedure(ByVal queries As ArrayList, Optional ByVal cancelOnError As Boolean = True, Optional ByVal useTran As Boolean = True, Optional cnx As OdbcConnection = Nothing) As Integer
+        Return procedure(queries.ToArray, cancelOnError, useTran, cnx)
     End Function
     ''' <summary>
     ''' Executes a SET of queries one by one
     ''' </summary>
-    ''' <param name="SQL">Set of Queries</param>
+    ''' <param name="queries">Set of Queries</param>
     ''' <param name="cancelOnError">Cancel the process if an error occurs</param>
     ''' <param name="useTran">Use a transaction</param>
     ''' <param name="connection">Connection to use</param>
     ''' <returns>1 if successful or an error code if it failts</returns>
-    Public Function procedure(ByVal SQL As String(), Optional ByVal cancelOnError As Boolean = True, Optional ByVal useTran As Boolean = True, Optional connection As OdbcConnection = Nothing) As Integer
+    Public Function procedure(ByVal queries As String(), Optional ByVal cancelOnError As Boolean = True, Optional ByVal useTran As Boolean = True, Optional connection As OdbcConnection = Nothing) As Integer
         Dim i As Integer
         Dim tran As OdbcTransaction = Nothing
         Try
-            Dim rSQL(SQL.Count - 1) As String
+            Dim rSQL(queries.Count - 1) As String
             Dim cmd As New OdbcCommand("")
 
             If connection Is Nothing Then
@@ -214,14 +216,14 @@ Public Module commandHelpers
 
             If useTran Then cmd.Transaction = tran
             cmd.CommandTimeout = 600
-            For i = 0 To SQL.Count - 1
-                If SQL(i) = "" Then Continue For
+            For i = 0 To queries.Count - 1
+                If queries(i) = "" Then Continue For
                 For j As Integer = 0 To i
-                    SQL(i) = Replace(SQL(i), String.Format("@@rSQL{0}@@", j), rSQL(j)).Trim()
+                    queries(i) = Replace(queries(i), String.Format("@@rSQL{0}@@", j), rSQL(j)).Trim()
                 Next
-                cmd.CommandText = SQL(i)
-                If SQL(i).ToUpper.StartsWith("SELECT") Then
-                    Using dr As OdbcDataReader = vnframework.ExecuteReader(cmd)
+                cmd.CommandText = queries(i)
+                If queries(i).ToUpper.StartsWith("SELECT") Then
+                    Using dr As OdbcDataReader = ExecuteReader(cmd)
                         If dr.Read Then
                             If dr.GetName(0).ToUpper = "VERIFY" Then 'Columns called VERIFY are used to validate if a query was successful
                                 If CLng(dr(0)) = 0 Then
@@ -241,11 +243,11 @@ Public Module commandHelpers
             Return 1
         Catch e1 As OdbcException
             If Not cancelOnError Then
-                For j As Integer = 1 To SQL.Length - 1
-                    SQL(j - 1) = SQL(j)
+                For j As Integer = 1 To queries.Length - 1
+                    queries(j - 1) = queries(j)
                 Next
-                ReDim Preserve SQL(SQL.Length - 2)
-                Return procedure(SQL, cancelOnError)
+                ReDim Preserve queries(queries.Length - 2)
+                Return procedure(queries, cancelOnError)
             End If
             Try
                 If Not IsNothing(tran) And useTran Then tran.Rollback()
@@ -266,28 +268,28 @@ Public Module commandHelpers
     ''' <summary>
     ''' Executes a SET of queries one by one
     ''' </summary>
-    ''' <param name="SQL">Set of Queries</param>
+    ''' <param name="queries">Set of Queries</param>
     ''' <param name="mysqlconnection">Connection to use</param>
     ''' <param name="cancelOnError">Cancel the process if an error occurs</param>
     ''' <param name="useTran">Use a transaction</param>
     ''' <returns>1 if successful or an error code if it failts</returns>
-    Function procedureMySQL(ByVal SQL As String(), MySQLConnection As MySqlConnection, Optional ByVal cancelOnError As Boolean = True, Optional ByVal useTran As Boolean = True) As Integer
+    Function procedureMySQL(ByVal queries As String(), MySQLConnection As MySqlConnection, Optional ByVal cancelOnError As Boolean = True, Optional ByVal useTran As Boolean = True) As Integer
         Dim i As Integer
         Dim tran As MySqlTransaction = Nothing
         Try
             If MySQLConnection.State <> ConnectionState.Open Then MySQLConnection.Open()
-            Dim rSQL(SQL.Count - 1) As String
+            Dim rSQL(queries.Count - 1) As String
             If useTran Then tran = MySQLConnection.BeginTransaction
             Using cmd As New MySqlCommand("", MySQLConnection)
                 If useTran Then cmd.Transaction = tran
                 cmd.CommandTimeout = 600
-                For i = 0 To SQL.Count - 1
-                    If SQL(i) = "" Then Continue For
+                For i = 0 To queries.Count - 1
+                    If queries(i) = "" Then Continue For
                     For j As Integer = 0 To i
-                        SQL(i) = Replace(SQL(i), String.Format("@@rSQL{0}@@", j), rSQL(j))
+                        queries(i) = Replace(queries(i), String.Format("@@rSQL{0}@@", j), rSQL(j))
                     Next
-                    cmd.CommandText = SQL(i)
-                    If SQL(i).ToUpper.StartsWith("SELECT") Then
+                    cmd.CommandText = queries(i)
+                    If queries(i).ToUpper.StartsWith("SELECT") Then
                         Using dr As MySqlDataReader = ExecuteReader(cmd)
                             If dr.Read Then
                                 If dr.GetName(0).ToUpper = "VERIFY" And CInt(dr(0)) = 0 Then
@@ -308,11 +310,11 @@ Public Module commandHelpers
             Return 1
         Catch e1 As MySqlException
             If Not cancelOnError Then
-                For j As Integer = 1 To SQL.Length - 1
-                    SQL(j - 1) = SQL(j)
+                For j As Integer = 1 To queries.Length - 1
+                    queries(j - 1) = queries(j)
                 Next
-                ReDim Preserve SQL(SQL.Length - 2)
-                Return procedureMySQL(SQL, MySQLConnection, cancelOnError)
+                ReDim Preserve queries(queries.Length - 2)
+                Return procedureMySQL(queries, MySQLConnection, cancelOnError)
             End If
             Try
                 If Not IsNothing(tran) And useTran Then tran.Rollback()
@@ -331,16 +333,12 @@ Public Module commandHelpers
     ''' <summary>
     ''' Executes a SET of queries one by one
     ''' </summary>
-    ''' <param name="SQL">Set of Queries</param>
+    ''' <param name="queries">Set of Queries</param>
     ''' <param name="mysqlconnection">Connection to use</param>
     ''' <param name="cancelOnError">Cancel the process if an error occurs</param>
     ''' <param name="useTran">Use a transaction</param>
     ''' <returns>1 if successful or an error code if it failts</returns>
-    Public Function procedureMySQL(ByVal SQL As ArrayList, MySQLConnection As MySqlConnection, Optional ByVal cancelOnError As Boolean = True, Optional ByVal useTran As Boolean = True) As Integer
-        Dim sqlString(SQL.Count) As String
-        For i As Integer = 0 To SQL.Count - 1
-            sqlString(i) = SQL.Item(i)
-        Next
-        Return procedureMySQL(sqlString, MySQLConnection, cancelOnError, useTran)
+    Public Function procedureMySQL(ByVal queries As ArrayList, MySQLConnection As MySqlConnection, Optional ByVal cancelOnError As Boolean = True, Optional ByVal useTran As Boolean = True) As Integer
+        Return procedureMySQL(queries.ToArray, MySQLConnection, cancelOnError, useTran)
     End Function
 End Module

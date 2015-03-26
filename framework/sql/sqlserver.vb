@@ -410,14 +410,14 @@ Public Class sqlserver
                 i = 1
             Next
 
-            Dim sql_arreglo As New List(Of String)
-            sql_arreglo.Add(String.Format("SELECT * INTO {0}_temp FROM {1} WHERE 1=2", "#" & tableName, tableName))
-            sql_arreglo.Add(String.Format("BULK INSERT {0}_temp FROM '{1}' WITH (FIELDTERMINATOR = '\t')", "#" & tableName, fileName))
-            sql_arreglo.Add(String.Format("INSERT INTO {0} ({1}) SELECT {1} FROM {4}_temp a WHERE (SELECT COUNT(*) FROM {0} b WHERE a.{2}=b.{2}) = 0 AND {3}", tableName, scampos, scampoid, condition, "#" & tableName))
-            sql_arreglo.Add(String.Format("UPDATE {0} SET {1} FROM {0} a, {3}_temp b WHERE a.{2}=b.{2}", tableName, scamposUpd, scampoid, "#" & tableName))
-            sql_arreglo.Add(String.Format("DROP TABLE {0}_temp", "#" & tableName))
+            Dim queries As New List(Of String)
+            queries.Add(String.Format("SELECT * INTO {0}_temp FROM {1} WHERE 1=2", "#" & tableName, tableName))
+            queries.Add(String.Format("BULK INSERT {0}_temp FROM '{1}' WITH (FIELDTERMINATOR = '\t')", "#" & tableName, fileName))
+            queries.Add(String.Format("INSERT INTO {0} ({1}) SELECT {1} FROM {4}_temp a WHERE (SELECT COUNT(*) FROM {0} b WHERE a.{2}=b.{2}) = 0 AND {3}", tableName, scampos, scampoid, condition, "#" & tableName))
+            queries.Add(String.Format("UPDATE {0} SET {1} FROM {0} a, {3}_temp b WHERE a.{2}=b.{2}", tableName, scamposUpd, scampoid, "#" & tableName))
+            queries.Add(String.Format("DROP TABLE {0}_temp", "#" & tableName))
 
-            If procedure(sql_arreglo) = 1 Then _
+            If procedure(queries) = 1 Then _
                 textFileToTable = True
         Catch ex As Exception
             showError(ex.Message)

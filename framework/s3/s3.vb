@@ -22,7 +22,13 @@ Public Class s3Library
     ''' <param name="accessKey">AWS Access Key</param>
     ''' <param name="secretKey">AWS Secret Key</param>
     Public Sub New(accessKey As SecureString, secretKey As SecureString)
-        client = New AmazonS3Client(accessKey.ToString, secretKey.ToString)
+        Dim accessKeyPtr As IntPtr = Runtime.InteropServices.Marshal.SecureStringToBSTR(accessKey)
+        Dim accessKeyStr As String = Runtime.InteropServices.Marshal.PtrToStringUni(accessKeyPtr)
+
+        Dim secretKeyPtr As IntPtr = Runtime.InteropServices.Marshal.SecureStringToBSTR(secretKey)
+        Dim secretKeyStr As String = Runtime.InteropServices.Marshal.PtrToStringUni(secretKeyPtr)
+
+        client = New AmazonS3Client(accessKeyStr, secretKeyStr)
     End Sub
 
     ''' <summary>

@@ -51,8 +51,6 @@
     Public Const ERROR_SQL_CLIENT_INITIALIZATION As String = "No se logró iniciar el cliente de conexión. Si está utilizando SQL Server asegurese de tener instalado el Cliente de SQL: "
     Public Const ERROR_DATABASE_PARAMETER_NOT_SET As String = "Los parametros de conexion no han sido configurados: "
 
-
-
     'SQL Server Error Messaged replacements
     Public Const REPLACENULLFIELD As String = "No puede dejar el campo '$1' vacio"
     Public Const REPLACEUNCLOSEDQUOTATION As String = "El valor ingresado tiene caracteres invalidos"
@@ -108,4 +106,9 @@
     Public Const WARN_MAX_RUNS As String = "Se alcanzó la máxima cantidad de ciclos para un proceso: "
     Public Const MSG_CONNECT_REMOTE_DB As String = "Conectando a base de datos remota "
     Public Const ERROR_CONNECT_REMOTE_DB As String = "Error al conectar a base de datos remota"
+
+    'File transfers
+    Public Const MSG_DOWNLOADING_FILE As String = "Error descargando archivo"
+    Public Const MSG_DELETING_FILE As String = "Eliminando archivo"
+    Public Const ERROR_DELETING_FILE As String = "No se pudo eliminar el archivo {0}. Asegurese que este accesible para borrarse"
 End Module

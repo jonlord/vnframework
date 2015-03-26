@@ -1,6 +1,14 @@
 ﻿# Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.7] - 2015-03-25  
+### Changed  
+ - The S3 Library now uses Secure String to provide a layer of security
+ - Added more locale strings to help in database connectivity messages and errors  
+
+### Changed  
+ - The S3 Library now uses Secure String to provide a layer of security
+
 ## [0.6] - 2015-03-24  
 ### Added  
  - User Messages  
