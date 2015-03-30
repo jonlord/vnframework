@@ -11,6 +11,7 @@
     Public Const MSGSUCCESSSAVE As String = "El registro ha sido salvado"
     Public Const MSGPRINTRECORDS As String = "¿Confirma que se imprimirán {0} registros?"
     Public Const ERRORPRINTING As String = "No se logro imprimir el registro, favor intente nuevamente"
+    Public Const ERROR_NUMERIC_ONLY As String = "El valor debe ser numérico"
 
     'Database related errors
     Public Const ERRROOLEDBTYPENOTFOUND As String = "El System.Type {0} no tiene un tipo OleDB compatible en el campo {1}"
