@@ -1,6 +1,11 @@
 ﻿# Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.8] - 2015-03-30  
+### Added  
+ - Added function to validate if a DataGridViewCell is numeric  
+ - Added Numeric Error string to locales
+
 ## [0.7] - 2015-03-25  
 ### Changed  
  - The S3 Library now uses Secure String to provide a layer of security

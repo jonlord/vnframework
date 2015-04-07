@@ -178,7 +178,8 @@ Public Module commandHelpers
     ''' <param name="cnx"></param>
     ''' <returns></returns>
     Public Function procedure(ByVal queries As List(Of String), Optional ByVal cancelOnError As Boolean = True, Optional ByVal useTran As Boolean = True, Optional cnx As OdbcConnection = Nothing) As Integer
-        Return procedure(queries.ToArray, cancelOnError, useTran, cnx)
+        Dim array As String() = CType(queries.ToArray(), String())
+        Return procedure(array, cancelOnError, useTran, cnx)
     End Function
     ''' <summary>
     '''
@@ -189,7 +190,8 @@ Public Module commandHelpers
     ''' <param name="cnx"></param>
     ''' <returns></returns>
     Public Function procedure(ByVal queries As ArrayList, Optional ByVal cancelOnError As Boolean = True, Optional ByVal useTran As Boolean = True, Optional cnx As OdbcConnection = Nothing) As Integer
-        Return procedure(queries.ToArray, cancelOnError, useTran, cnx)
+        Dim array As String() = CType(queries.ToArray(GetType(String)), String())
+        Return procedure(array, cancelOnError, useTran, cnx)
     End Function
     ''' <summary>
     ''' Executes a SET of queries one by one

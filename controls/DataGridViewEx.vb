@@ -24,6 +24,16 @@ Public Class DatagridviewEx
     ''' <summary>
     ''' Populates a DataGridView with a DataTable
     ''' </summary>
+    ''' <param name="xml">xml</param>
+    ''' <param name="columnNames">List of Column Names</param>
+    Sub populate(xml As Xml.XmlDocument, ByVal columnNames As String())
+        Dim dt As New DataTable
+        populate(dt, columnNames)
+    End Sub
+
+    ''' <summary>
+    ''' Populates a DataGridView with a DataTable
+    ''' </summary>
     ''' <param name="dataTable">Datatable to use</param>
     ''' <param name="columnNames">List of Column Names</param>
     Sub populate(dataTable As DataTable, ByVal columnNames As String())
@@ -297,4 +307,32 @@ Public Class DatagridviewEx
         Dim indice As Integer = 2
         Me.Columns.Insert(indice, column)
     End Sub
+
+    ''' <summary>
+    ''' Validates if a value entered in a datagridview cell is numeric
+    ''' </summary>
+    ''' <param name="sender">DataGridViewEditing Control</param>
+    ''' <param name="e">Key Press Event Argument</param>
+    ''' <param name="columnName">ColumnName to validate</param>
+    ''' <returns>True if accepted, false if rejected</returns>
+    Function validateNumberOnly(sender As Object, e As KeyPressEventArgs, columnName As String) As Boolean
+        Dim caracter As Char = e.KeyChar
+        If caracter = ChrW(Keys.Tab) Then
+            Return True
+        End If
+
+        Dim txt As TextBox = TryCast(sender, TextBox)
+        If IsNothing(txt) Then
+            Return True
+        End If
+        With Me
+            If ((Char.IsNumber(caracter)) OrElse (caracter = ChrW(Keys.Back)) OrElse (caracter = ".")) AndAlso (txt.Text.Contains(".") = False) Then
+                .Rows(.CurrentCell.RowIndex).Cells(columnName).ErrorText = ""
+                Return False
+            Else
+                .Rows(.CurrentCell.RowIndex).Cells(columnName).ErrorText = ERROR_NUMERIC_ONLY
+                Return True
+            End If
+        End With
+    End Function
 End Class
