@@ -4,6 +4,24 @@
 ''' Error Handling manipulation library to facilitate showing errors to the user
 ''' </summary>
 Public Module errorHandling
+    Private errorMessage As String = ""
+
+    ''' <summary>
+    ''' Get a global error message
+    ''' </summary>
+    ''' <param name="message">Error Message to save</param>
+    Sub setGlobalErrorMessage(message As String)
+        errorMessage = message
+    End Sub
+
+    ''' <summary>
+    ''' Get a global error message
+    ''' </summary>
+    ''' <returns>Error Message</returns>
+    Function getGlobalErrorMessage()
+        Return errorMessage
+    End Function
+
     ''' <summary>
     ''' Shows an error to the user, using the best option available between a message box and an error provider
     ''' </summary>

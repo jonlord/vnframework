@@ -12,6 +12,7 @@
     ''' </summary>
     ''' <param name="msg">Message to write</param>
     Public Shared Sub writeToErrorLog(msg As String)
+        errorHandling.setGlobalErrorMessage(msg)
         Debug.Print(msg)
     End Sub
 End Class

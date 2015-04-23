@@ -78,14 +78,16 @@ Public Class sqlserver
     ''' <returns>User friendly version of the error message</returns>
     Shared Function cleanError(errorMessage As String) As String
         'Lets remove the SQL Server standard error message sections
-        cleanError = errorMessage.Replace("[Microsoft]", "").Replace("[SQL Server]", "").Replace("[SQL Server Native Client]", "").Replace("[SQL Server Native Client 10.0]", "").Replace("[SQL Server Native Client 11.0]", "").Replace("[SQL Native Client]", "").Replace("Error [42S02]", "").Replace("Error [22003]", "").Replace("Error [42000]", "").Replace("Error [HYT00]", "").Replace("Error [23000]", "").Replace("Error [01000]", "").Replace("Error [22001]", "").Replace("Error [42S22]", "").Replace("  ", "").Replace("The transaction ended In the trigger.", "").Replace("The batch has been aborted", "").Trim().Replace("The statement has been terminated.", "").Trim()
+        cleanError = errorMessage.Replace("[Microsoft]", "").Replace("[SQL Server]", "").Replace("[SQL Server Native Client]", "").Replace("[SQL Server Native Client 10.0]", "").Replace("[SQL Server Native Client 11.0]", "").Replace("[SQL Native Client]", "").Replace("Error [42S02]", "").Replace("Error [22003]", "").Replace("Error [42000]", "").Replace("Error [HYT00]", "").Replace("Error [23000]", "").Replace("Error [01000]", "").Replace("Error [22001]", "").Replace("Error [42S22]", "").Replace("ERROR [42S22]", "").Replace("  ", "").Replace("The transaction ended In the trigger.", "").Replace("The batch has been aborted", "").Trim().Replace("The statement has been terminated.", "").Trim()
 
         'Lets replace common errors for more user friendly errors
         cleanError = Regex.Replace(cleanError, ERRORNULLFIELD, REPLACENULLFIELD)
         cleanError = Regex.Replace(cleanError, ERRORUNCLOSEDQUOTATION, REPLACEUNCLOSEDQUOTATION)
+        If cleanError.StartsWith(sqlserver.ERRORPRIMARYKEY) Then _
+            cleanError = ERRORDUPLICATERECORD
         If cleanError.ToLower.IndexOf(ERRORARITHMETICOVERFLOW.ToLower) > -1 Then _
-            cleanError = cleanError.Replace(ERRORARITHMETICOVERFLOW, REPLACEARITHMETICOVERFLOW)
-        If cleanError.ToLower.IndexOf(ERRORSTRINGTRUNCATED.ToLower) > -1 Then _
+                cleanError = cleanError.Replace(ERRORARITHMETICOVERFLOW, REPLACEARITHMETICOVERFLOW)
+            If cleanError.ToLower.IndexOf(ERRORSTRINGTRUNCATED.ToLower) > -1 Then _
             cleanError = cleanError.Replace(ERRORSTRINGTRUNCATED, REPLACESTRINGTRUNCATED)
         If cleanError.ToLower.IndexOf(ERRORFOREIGNKEY.ToLower) > -1 Then _
             cleanError = cleanError.Replace(ERRORFOREIGNKEY, "").Replace("'", "").Replace(",", "").Replace("""", "").Replace("table", "").Replace(".", "").Replace("dbo", "").Replace("table", "").Replace("column", "").Replace("The conflict occurred in database", vbNewLine & vbNewLine) & REPLACEFOREIGNKEY
