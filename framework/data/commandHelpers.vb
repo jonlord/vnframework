@@ -53,7 +53,7 @@ Public Module commandHelpers
     ''' <param name="command">Command to use</param>
     ''' <returns>Scalar value</returns>
     Function ExecuteScalar(ByVal command As MySqlCommand) As Object
-        command.CommandText = sql.parseToSQLServer(command.CommandText) 'Let's make the query compatible with SQL Server
+        'command.CommandText = sql.parseToSQLServer(command.CommandText) 'Let's make the query compatible with SQL Server
         logs.writeToLog(command.CommandText) 'This line is optional, I like having my queries "logged" someplace I can check for errors, for development purposes I use Debug.Print
         Return command.ExecuteScalar
     End Function

@@ -59,4 +59,14 @@ Public Module dates
     Public Function extractDateAsString(ByVal myDate As Date) As String
         Return myDate.Month & "/" & myDate.Day & "/" & myDate.Year
     End Function
+
+    ''' <summary>
+    ''' Get Diffrence in seconds between two dates
+    ''' </summary>
+    ''' <param name="date1">Fist Date To Compare</param>
+    ''' <param name="date2">Second Date To Compare</param>
+    ''' <returns>Diffrence in Seconds</returns>
+    Public Function getDiffSeconds(date1 As Date, date2 As Date) As Long
+        getDiffSeconds = Math.Round((date2 - date1).TotalSeconds * 24 * 60 * 60, 0)
+    End Function
 End Module

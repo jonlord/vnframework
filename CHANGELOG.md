@@ -1,6 +1,14 @@
 ﻿# Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.9] - 2015-05-12
+## Added
+ - Added function to get diffrence in seconds between two dates
+
+## [0.8] - 2015-03-30  
+### Added  
+ - Added functions to manage global error handling
+
 ## [0.8] - 2015-03-30  
 ### Added  
  - Added function to validate if a DataGridViewCell is numeric  
