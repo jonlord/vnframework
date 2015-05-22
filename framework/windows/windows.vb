@@ -98,8 +98,8 @@ Public Class WindowsOperations
     ''' </summary>
     ''' <param name="folderName">Special folder name</param>
     ''' <returns>Path to special folder</returns>
-    Public Function getSpecialFolderA(ByVal folderName As System.Environment.SpecialFolder) As String
-        Dim typeSpecialFolder As System.Environment.SpecialFolder
+    Public Function getSpecialFolderA(ByVal folderName As Environment.SpecialFolder) As String
+        Dim typeSpecialFolder As Environment.SpecialFolder
         For Each typeSpecialFolder In typeSpecialFolder.GetValues(GetType(Environment.SpecialFolder))
             If typeSpecialFolder = folderName Then
                 Return Environment.GetFolderPath(typeSpecialFolder)

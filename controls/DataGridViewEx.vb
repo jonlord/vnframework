@@ -36,38 +36,44 @@ Public Class DatagridviewEx
     ''' </summary>
     ''' <param name="dataTable">Datatable to use</param>
     ''' <param name="columnNames">List of Column Names</param>
-    Sub populate(dataTable As DataTable, ByVal columnNames As String())
+    Sub populate(dataTable As DataTable, Optional ByVal columnNames As String() = Nothing)
         Try
             With Me
                 .Rows.Clear()
                 .Columns.Clear()
 
-                For i As Integer = 0 To columnNames.Count - 1
+                For i As Integer = 0 To dataTable.Columns.Count - 1
+                    Dim columnName As String = ""
+                    If Not columnNames Is Nothing Then
+                        If columnNames.Count - 1 >= i Then
+                            columnName = columnNames(i)
+                        End If
+                    End If
                     If dataTable.Columns(i).DataType = GetType(Boolean) Then
                         Dim col As New DataGridViewCheckBoxColumn()
                         col.Name = dataTable.Columns(i).ColumnName
-                        col.HeaderText = columnNames(i)
+                        col.HeaderText = columnName
                         .Columns.Add(col)
                     Else
-                        .Columns.Add(dataTable.Columns(i).ColumnName, columnNames(i))
+                        .Columns.Add(dataTable.Columns(i).ColumnName, columnName)
                     End If
                 Next
 
                 For Each dataRow1 As DataRow In dataTable.Rows
                     Dim dataGridRow1 As New DataGridViewRow
                     dataGridRow1.CreateCells(Me)
-                    For i As Integer = 0 To columnNames.Count - 1
+                    For i As Integer = 0 To dataRow1.Table.Columns.Count - 1
                         dataGridRow1.Cells(i).Value = dataRow1(i)
                     Next
                     .Rows.Add(dataGridRow1)
                 Next
 
                 For i As Integer = 0 To .Columns.Count - 1
+                    .Columns(i).ReadOnly = True
+                    .Columns(i).HeaderCell = Nothing
+                    .Columns(i).HeaderCell = New DataGridViewAutoFilterColumnHeaderCell()
                     If Not columnNames Is Nothing Then
                         If columnNames.Count - 1 >= i Then
-                            .Columns(i).ReadOnly = True
-                            .Columns(i).HeaderCell = Nothing
-                            .Columns(i).HeaderCell = New DataGridViewAutoFilterColumnHeaderCell()
                             .Columns(i).HeaderText = columnNames(i)
                         End If
                     End If

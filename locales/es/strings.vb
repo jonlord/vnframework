@@ -73,7 +73,7 @@
     Public Const ERRORSTARTINGSERVICE As String = "Error al iniciar el servicio: {0}"
 
     'HTTP Server
-    Public Const HTTPSYSTEMREQUIREMENTS As String = "Windows XP SP2, Server 2003, o superiro higher es requerido para utilizar HTTP Listener."
+    Public Const HTTPSYSTEMREQUIREMENTS As String = "Windows XP SP2, Server 2003, o superior es requerido para utilizar HTTP Listener."
     Public Const HTTPMETHODNOTFOUND As String = "El metodo no fue encontrado"
 
     'GDI
@@ -94,11 +94,12 @@
     Public Const DEC As String = "Diciembre"
 
     'User Errors
-    Public Const ERRORFORMATTELEPHONE As String = "El teléfono no esta en el formato correcto"
-    Public Const ERRORPERMISIONAREAMANAGER As String = "Solo un gerente de área puede habiltar este permiso"
-    Public Const ERRORPERMISIONENTRY As String = "Su usuario no dispone de los permisos necesarios para entrar al aplicativo"
-    Public Const ERRORPERMISIONOPTION As String = "Su usuario no dispone de los permisos necesarios para esta opción"
-    Public Const ERRORPERMISIONBRANCH As String = "Esta sucursal no puede ejecutar esta opción"
+    Public Const ERROR_FORMAT_TELEPHONE As String = "El teléfono no esta en el formato correcto"
+    Public Const ERROR_PERMISION_AREA_MANAGER As String = "Solo un gerente de área puede habiltar este permiso"
+    Public Const ERROR_PERMISION_ENTRY As String = "Su usuario no dispone de los permisos necesarios para entrar al aplicativo"
+    Public Const ERROR_PERMISION_OPTION As String = "Su usuario no dispone de los permisos necesarios para esta opción"
+    Public Const ERROR_PERMISION_BRANCH As String = "Esta sucursal no puede ejecutar esta opción"
+    Public Const ERROR_SELECT_RECORD As String = "Debe seleccionar al menos un registro para utilizar esta opción"
 
     'Configuration Constants
     Public Const MAILESCAPE As String = "@." 'Represents no mail given
@@ -115,5 +116,11 @@
 
     'Generic Fields
     Public Const GF_NAME As String = "Nombre"
-
+    Public Const GF_CUSTOMER As String = "Cliente"
+    Public Const GF_CODE As String = "Código"
+    Public Const GF_PRODUCT_CODE As String = "Código de Producto"
+    Public Const GF_PRODUCT As String = "Producto"
+    Public Const GF_DATE As String = "Fecha"
+    Public Const GF_QUANTITY As String = "Cantidad"
+    Public Const GF_BARCODE As String = "Código de Barras"
 End Module
