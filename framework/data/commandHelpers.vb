@@ -201,7 +201,7 @@ Public Module commandHelpers
     ''' <param name="useTran">Use a transaction</param>
     ''' <param name="connection">Connection to use</param>
     ''' <returns>1 if successful or an error code if it failts</returns>
-    Public Function procedure(ByVal queries As String(), Optional ByVal cancelOnError As Boolean = True, Optional ByVal useTran As Boolean = True, Optional connection As OdbcConnection = Nothing) As Integer
+    Public Function procedure(ByVal queries As String(), Optional ByVal cancelOnError As Boolean = True, Optional ByVal useTran As Boolean = True, Optional connection As OdbcConnection = Nothing, Optional errMsg As String = "") As Integer
         Dim i As Integer
         Dim tran As OdbcTransaction = Nothing
         Try
@@ -257,14 +257,25 @@ Public Module commandHelpers
                 logs.writeToLog(e2.Message)
                 logs.writeToLog(e2.StackTrace)
             End Try
-            Dim errMsg As String = vnframework.sqlserver.cleanError(e1.Message)
+            errMsg = sqlserver.cleanError(e1.Message)
 
             logs.writeToErrorLog(errMsg)
-            logs.writeToLog(errMsg)
             logs.writeToLog(errMsg)
             Return e1.ErrorCode
         End Try
         Return 0
+    End Function
+
+    ''' <summary>
+    '''
+    ''' </summary>
+    ''' <param name="queries"></param>
+    ''' <param name="cancelOnError"></param>
+    ''' <param name="useTran"></param>
+    ''' <returns></returns>
+    Public Function procedureMySQL(ByVal queries As List(Of String), MySQLConnection As MySqlConnection, Optional ByVal cancelOnError As Boolean = True, Optional ByVal useTran As Boolean = True) As Integer
+        Dim array As String() = CType(queries.ToArray(), String())
+        Return procedureMySQL(array, MySQLConnection, cancelOnError, useTran)
     End Function
 
     ''' <summary>

@@ -358,7 +358,7 @@ Public Class sqlserver
     Shared Function uploadFile(path As String, table As String, field As String, idField As String, idValue As String, connection As SqlConnection) As Boolean
         uploadFile = False
         Try
-            Dim sql As String = String.Format("UPDATE {0} SET {1}=@archivo WHERE {2}={3}", table, field, idField, idValue)
+            Dim query As String = String.Format("UPDATE {0} SET {1}=@archivo WHERE {2}={3}", table, field, idField, idValue)
             Dim ms As MemoryStream = New MemoryStream()
             Dim fs As FileStream = New FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
 
@@ -369,16 +369,12 @@ Public Class sqlserver
             ms.Flush()
             fs.Close()
 
-            Using connection
-                Using cmd As SqlCommand = connection.CreateCommand()
-                    If connection.State <> ConnectionState.Open Then connection.Open()
-                    cmd.CommandText = sql
-                    cmd.Parameters.Add("@archivo", SqlDbType.VarBinary).Value = arrImg
+            Dim cmd As New SqlCommand(query, connection)
+            If connection.State <> ConnectionState.Open Then connection.Open()
+            cmd.Parameters.Add("@archivo", SqlDbType.VarBinary).Value = arrImg
 
-                    cmd.ExecuteNonQuery()
-                    uploadFile = True
-                End Using
-            End Using
+            cmd.ExecuteNonQuery()
+            uploadFile = True
             ms.Close()
             fs.Dispose()
             ms.Dispose()

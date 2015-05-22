@@ -1,6 +1,12 @@
 ﻿# Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.10] - 2015-05-21
+## Added 
+ - Allow error message functions to be returned with a by reference variable
+ - Allow arrays to be sent as parameters in webservices
+ - Introducced Generic Fields to ease translations
+
 ## [0.9] - 2015-05-12
 ## Added
  - Added function to get diffrence in seconds between two dates

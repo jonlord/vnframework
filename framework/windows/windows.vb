@@ -1,5 +1,4 @@
-﻿Imports IWshRuntimeLibrary
-Imports System.ServiceProcess
+﻿Imports System.ServiceProcess
 
 ''' <summary>
 ''' Collection of non-original functions to manage machine startup up and shutdown
@@ -103,7 +102,7 @@ Public Class WindowsOperations
         Dim typeSpecialFolder As System.Environment.SpecialFolder
         For Each typeSpecialFolder In typeSpecialFolder.GetValues(GetType(Environment.SpecialFolder))
             If typeSpecialFolder = folderName Then
-                Return System.Environment.GetFolderPath(typeSpecialFolder)
+                Return Environment.GetFolderPath(typeSpecialFolder)
             End If
         Next
         Return ""

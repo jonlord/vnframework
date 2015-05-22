@@ -112,4 +112,8 @@
     Public Const MSG_DOWNLOADING_FILE As String = "Error descargando archivo"
     Public Const MSG_DELETING_FILE As String = "Eliminando archivo"
     Public Const ERROR_DELETING_FILE As String = "No se pudo eliminar el archivo {0}. Asegurese que este accesible para borrarse"
+
+    'Generic Fields
+    Public Const GF_NAME As String = "Nombre"
+
 End Module

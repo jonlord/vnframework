@@ -11,9 +11,18 @@ Public Class webServiceConsumer
     Public Class webServiceParameter
         Public name As String
         Public value As String
+        Public arrayOfValues As ArrayList
         Sub New(name As String, value As String)
             Me.name = name
             Me.value = value
+        End Sub
+        Sub New(name As String, values As ArrayList)
+            Me.name = name
+            Me.arrayOfValues = values
+        End Sub
+        Sub New(name As String, value As Date)
+            Me.name = name
+            Me.value = String.Format("{0}-{1}-{2}", value.Year, value.Month, value.Day)
         End Sub
     End Class
 
@@ -33,7 +42,15 @@ Public Class webServiceConsumer
     Private Shared Function buildParameters(parameterList As ArrayList) As String
         buildParameters = ""
         For Each parameter As webServiceParameter In parameterList
-            buildParameters &= String.Format("<{0}>{1}</{0}>", parameter.name, parameter.value)
+            If Not parameter.arrayOfValues Is Nothing Then
+                Dim values As String = ""
+                For Each value As String In parameter.arrayOfValues
+                    values &= String.Format("<{0}>{1}</{0}>", parameter.name, value)
+                Next
+                buildParameters &= String.Format("<{0} soapenc:arrayType=""soapenc:string[{2}]"">{1}</{0}>", parameter.name, values, parameter.arrayOfValues.Count)
+            Else
+                buildParameters &= String.Format("<{0}>{1}</{0}>", parameter.name, parameter.value)
+            End If
         Next
     End Function
 
