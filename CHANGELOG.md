@@ -1,6 +1,16 @@
 ﻿# Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.11] - 2015-05-22  
+## Added 
+ - Added a function to get the previous month's name by the current month's numeric value  
+ - Added a function to get a month's numeric value by its name  
+ - Added a function to get the amount of days in a month by its name  
+ - Added localization strings
+
+ ## Changed
+  - Changed S3's default redundancy to reduced
+
 ## [0.10] - 2015-05-21
 ## Added 
  - Allow error message functions to be returned with a by reference variable

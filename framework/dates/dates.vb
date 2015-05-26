@@ -34,6 +34,59 @@ Public Module dates
         End Select
         Return ""
     End Function
+    ''' <summary>
+    ''' Gets a month name of the previous month by its number
+    ''' </summary>
+    ''' <param name="index">Number of month</param>
+    ''' <returns>Month Name</returns>
+    Public Function prevMonthName(index As Integer) As String
+        index -= 1
+        If index = 0 Then index = 12
+        Return monthName(index)
+    End Function
+    ''' <summary>
+    ''' Gets a month index by its name
+    ''' </summary>
+    ''' <param name="monthName">Month Name</param>
+    ''' <returns>Month Name</returns>
+    Public Function monthIndex(ByVal monthName As String) As Integer
+        Select Case LCase(monthName)
+            Case LCase(JAN)
+                Return 1
+            Case LCase(FEB)
+                Return 2
+            Case LCase(MAR)
+                Return 3
+            Case LCase(APR)
+                Return 4
+            Case LCase(MAY)
+                Return 5
+            Case LCase(JUN)
+                Return 6
+            Case LCase(JUL)
+                Return 7
+            Case LCase(AUG)
+                Return 8
+            Case LCase(SEP)
+                Return 9
+            Case LCase(OCT)
+                Return 10
+            Case LCase(NOV)
+                Return 11
+            Case LCase(DEC)
+                Return 12
+        End Select
+        Throw New NotImplementedException()
+    End Function
+    ''' <summary>
+    ''' Gets the amount of days in a month
+    ''' </summary>
+    ''' <param name="monthName">Month Name</param>
+    ''' <returns>Amount of days in month</returns>
+    Public Function daysInMonth(year As Integer, monthName As String) As Integer
+        Dim month As Integer = monthIndex(monthName)
+        Return DateTime.DaysInMonth(year, month)
+    End Function
 
     ''' <summary>
     ''' Extracts the date as a string from a DateTimePicker

@@ -82,6 +82,7 @@ Public Class s3Library
             uploadRequest.WithBucketName(bucketName)
             uploadRequest.WithKey(destinationFilename)
             uploadRequest.WithFilePath(sourceFileName)
+            uploadRequest.StorageClass = S3StorageClass.ReducedRedundancy
             fileTransferUtility.Upload(uploadRequest)
             Return True
         Catch ex As Exception

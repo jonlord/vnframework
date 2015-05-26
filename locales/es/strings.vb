@@ -25,6 +25,8 @@
     Public Const ERROR_LOAD_RECORD As String = "Error al descargar registro"
     Public Const ERROR_LOAD_UPDATE As String = "Error al descargar actualización de registro"
     Public Const ERROR_CONVERSION As String = "Error al convertir datos"
+    Public Const ERROR_EXECUTING As String = "Error al ejecutar comando"
+    Public Const ERROR_SELECT As String = "Error al seleccionar registros"
 
     'Database related messages
     Public Const MSG_GET_RECORDS As String = "Recuperando registros: "
@@ -94,7 +96,8 @@
     Public Const DEC As String = "Diciembre"
 
     'User Errors
-    Public Const ERROR_FORMAT_TELEPHONE As String = "El teléfono no esta en el formato correcto"
+    Public Const ERROR_FORMAT_TELEPHONE As String = "El teléfono no está en el formato correcto"
+    Public Const ERROR_FORMAT_EMAIL As String = "El correo electrónico no está en el formato correcto"
     Public Const ERROR_PERMISION_AREA_MANAGER As String = "Solo un gerente de área puede habiltar este permiso"
     Public Const ERROR_PERMISION_ENTRY As String = "Su usuario no dispone de los permisos necesarios para entrar al aplicativo"
     Public Const ERROR_PERMISION_OPTION As String = "Su usuario no dispone de los permisos necesarios para esta opción"
@@ -113,6 +116,9 @@
     Public Const MSG_DOWNLOADING_FILE As String = "Error descargando archivo"
     Public Const MSG_DELETING_FILE As String = "Eliminando archivo"
     Public Const ERROR_DELETING_FILE As String = "No se pudo eliminar el archivo {0}. Asegurese que este accesible para borrarse"
+
+    'File Related Errors
+    Public Const ERROR_PROCESSING_FILE As String = "Error al procesar archivo"
 
     'Generic Fields
     Public Const GF_NAME As String = "Nombre"
