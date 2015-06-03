@@ -1,6 +1,10 @@
 ﻿# Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.12] - 2015-06-03  
+## Added 
+ - Added functions to convert a data type name to objects
+
 ## [0.11] - 2015-05-22  
 ## Added 
  - Added a function to get the previous month's name by the current month's numeric value  

@@ -27,6 +27,7 @@
     Public Const ERROR_CONVERSION As String = "Error al convertir datos"
     Public Const ERROR_EXECUTING As String = "Error al ejecutar comando"
     Public Const ERROR_SELECT As String = "Error al seleccionar registros"
+    Public Const ERROR_TYPE_NOT_DEFINED As String = "El tipo de datos {0} no está definido"
 
     'Database related messages
     Public Const MSG_GET_RECORDS As String = "Recuperando registros: "
