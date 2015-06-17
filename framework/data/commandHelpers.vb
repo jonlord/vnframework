@@ -170,28 +170,17 @@ Public Module commandHelpers
     End Function
 
     ''' <summary>
-    '''
+    ''' Executes a SET of queries one by one
     ''' </summary>
-    ''' <param name="queries"></param>
-    ''' <param name="cancelOnError"></param>
-    ''' <param name="useTran"></param>
-    ''' <param name="cnx"></param>
-    ''' <returns></returns>
-    Public Function procedure(ByVal queries As List(Of String), Optional ByVal cancelOnError As Boolean = True, Optional ByVal useTran As Boolean = True, Optional cnx As OdbcConnection = Nothing) As Integer
+    ''' <param name="queries">Set of Queries</param>
+    ''' <param name="cancelOnError">Cancel the process if an error occurs</param>
+    ''' <param name="useTran">Use a transaction</param>
+    ''' <param name="connection">Connection to use</param>
+    ''' <param name="rSQL">By Reference Arraylist returning the select statement results</param>
+    ''' <returns>1 if successful or an error code if it failts</returns>
+    Public Function procedure(ByVal queries As List(Of String), Optional ByVal cancelOnError As Boolean = True, Optional ByVal useTran As Boolean = True, Optional connection As OdbcConnection = Nothing, Optional errMsg As String = "", Optional ByRef rSQL() As String = Nothing) As Integer
         Dim array As String() = CType(queries.ToArray(), String())
-        Return procedure(array, cancelOnError, useTran, cnx)
-    End Function
-    ''' <summary>
-    '''
-    ''' </summary>
-    ''' <param name="queries"></param>
-    ''' <param name="cancelOnError"></param>
-    ''' <param name="useTran"></param>
-    ''' <param name="cnx"></param>
-    ''' <returns></returns>
-    Public Function procedure(ByVal queries As ArrayList, Optional ByVal cancelOnError As Boolean = True, Optional ByVal useTran As Boolean = True, Optional cnx As OdbcConnection = Nothing) As Integer
-        Dim array As String() = CType(queries.ToArray(GetType(String)), String())
-        Return procedure(array, cancelOnError, useTran, cnx)
+        Return procedure(array, cancelOnError, useTran, connection, errMsg, rSQL)
     End Function
     ''' <summary>
     ''' Executes a SET of queries one by one
@@ -200,12 +189,30 @@ Public Module commandHelpers
     ''' <param name="cancelOnError">Cancel the process if an error occurs</param>
     ''' <param name="useTran">Use a transaction</param>
     ''' <param name="connection">Connection to use</param>
+    ''' <param name="rSQL">By Reference Arraylist returning the select statement results</param>
     ''' <returns>1 if successful or an error code if it failts</returns>
-    Public Function procedure(ByVal queries As String(), Optional ByVal cancelOnError As Boolean = True, Optional ByVal useTran As Boolean = True, Optional connection As OdbcConnection = Nothing, Optional errMsg As String = "") As Integer
+    Public Function procedure(ByVal queries As ArrayList, Optional ByVal cancelOnError As Boolean = True, Optional ByVal useTran As Boolean = True, Optional connection As OdbcConnection = Nothing, Optional errMsg As String = "", Optional ByRef rSQL() As String = Nothing) As Integer
+        Dim array As String() = CType(queries.ToArray(GetType(String)), String())
+        Return procedure(array, cancelOnError, useTran, connection, errMsg, rSQL)
+    End Function
+    ''' <summary>
+    ''' Executes a SET of queries one by one
+    ''' </summary>
+    ''' <param name="queries">Set of Queries</param>
+    ''' <param name="cancelOnError">Cancel the process if an error occurs</param>
+    ''' <param name="useTran">Use a transaction</param>
+    ''' <param name="connection">Connection to use</param>
+    ''' <param name="rSQL">By Reference Arraylist returning the select statement results</param>
+    ''' <returns>1 if successful or an error code if it failts</returns>
+    Public Function procedure(ByVal queries As String(), Optional ByVal cancelOnError As Boolean = True, Optional ByVal useTran As Boolean = True, Optional connection As OdbcConnection = Nothing, Optional errMsg As String = "", Optional ByRef rSQL() As String = Nothing) As Integer
+        If queries.Count = 0 Then
+            Return 1
+        End If
+        setGlobalErrorMessage("")
         Dim i As Integer
         Dim tran As OdbcTransaction = Nothing
         Try
-            Dim rSQL(queries.Count - 1) As String
+            ReDim rSQL(queries.Count - 1)
             Dim cmd As New OdbcCommand("")
 
             If connection Is Nothing Then

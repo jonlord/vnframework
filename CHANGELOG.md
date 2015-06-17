@@ -1,6 +1,11 @@
 ﻿# Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.13] - 2015-06-16  
+## Added 
+ - A By Reference parameter is added to the procedure function that returns the values of the select commands sent to the procedure
+ - Additional localization strings
+
 ## [0.12] - 2015-06-03  
 ## Added 
  - Added functions to convert a data type name to objects
