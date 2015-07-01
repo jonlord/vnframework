@@ -104,6 +104,7 @@
     Public Const ERROR_PERMISION_OPTION As String = "Su usuario no dispone de los permisos necesarios para esta opción"
     Public Const ERROR_PERMISION_BRANCH As String = "Esta sucursal no puede ejecutar esta opción"
     Public Const ERROR_SELECT_RECORD As String = "Debe seleccionar al menos un registro para utilizar esta opción"
+    Public Const ERROR_INVALID_INPUT As String = "Debe ingresar un valor válido"
 
     'Configuration Constants
     Public Const MAILESCAPE As String = "@." 'Represents no mail given
@@ -147,4 +148,5 @@
     Public Const GF_STOCK As String = "Inventario"
     Public Const GF_VALUE As String = "Valor"
     Public Const GF_NUMBER As String = "Número"
+    Public Const GF_IS_ACTIVE As String = "Activo"
 End Module

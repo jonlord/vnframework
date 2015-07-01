@@ -61,6 +61,16 @@ Public Module StringEx
     End Function
 
     ''' <summary>
+    ''' Repeat a character n times
+    ''' </summary>
+    ''' <param name="str"></param>
+    ''' <returns>The string with characters escaped</returns>
+    <Extension()>
+    Public Function replicate(str As String, numberOfTimes As Integer) As String
+        replicate = New String(CChar(str), numberOfTimes)
+    End Function
+
+    ''' <summary>
     ''' Gets the MD5 hash for a string with optional salt
     ''' </summary>
     ''' <param name="str">String to be MD5'ed</param>

@@ -1,6 +1,10 @@
 ﻿# Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.14] - 2015-06-30  
+## Added 
+ - Function to replicate a string
+
 ## [0.13] - 2015-06-16  
 ## Added 
  - A By Reference parameter is added to the procedure function that returns the values of the select commands sent to the procedure

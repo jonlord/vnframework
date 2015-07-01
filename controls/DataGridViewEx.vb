@@ -204,7 +204,7 @@ Public Class DatagridviewEx
             bsBindignSource.Filter = ""
             'dbGridView.Rows.Clear()
             Using dataAdapter As OdbcDataAdapter = New OdbcDataAdapter(selectCMD)
-                Dim table As DataTable = New DataTable() With {.Locale = System.Globalization.CultureInfo.InvariantCulture}
+                Dim table As DataTable = New DataTable() With {.Locale = Globalization.CultureInfo.InvariantCulture}
                 dataAdapter.Fill(table)
                 bsBindignSource.DataSource = table
                 table.Dispose()
