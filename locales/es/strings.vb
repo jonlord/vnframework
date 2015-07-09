@@ -12,6 +12,7 @@
     Public Const MSGPRINTRECORDS As String = "¿Confirma que se imprimirá(n) {0} registro(s)?"
     Public Const ERRORPRINTING As String = "No se logro imprimir el registro, favor intente nuevamente"
     Public Const ERROR_NUMERIC_ONLY As String = "El valor debe ser numérico"
+    Public Const ERROR_GET_IMAGE As String = "Error al adquirir imagen: "
 
     'Database related errors
     Public Const ERRROOLEDBTYPENOTFOUND As String = "El System.Type {0} no tiene un tipo OleDB compatible en el campo {1}"
@@ -103,6 +104,7 @@
     Public Const ERROR_PERMISION_ENTRY As String = "Su usuario no dispone de los permisos necesarios para entrar al aplicativo"
     Public Const ERROR_PERMISION_OPTION As String = "Su usuario no dispone de los permisos necesarios para esta opción"
     Public Const ERROR_PERMISION_BRANCH As String = "Esta sucursal no puede ejecutar esta opción"
+    Public Const ERROR_PERMISION_IP As String = "Esta máquina no puede ejecutar esta opción"
     Public Const ERROR_SELECT_RECORD As String = "Debe seleccionar al menos un registro para utilizar esta opción"
     Public Const ERROR_INVALID_INPUT As String = "Debe ingresar un valor válido"
 
