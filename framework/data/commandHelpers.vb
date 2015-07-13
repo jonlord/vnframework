@@ -43,7 +43,7 @@ Public Module commandHelpers
     ''' <param name="command">Command to use</param>
     ''' <returns>Records affected</returns>
     Function ExecuteNonQuery(ByVal command As MySqlCommand) As Integer
-        command.CommandText = sql.parseToSQLServer(command.CommandText) 'Let's make the query compatible with SQL Server
+        'command.CommandText = sql.parseToSQLServer(command.CommandText) 'Let's make the query compatible with SQL Server
         logs.writeToLog(command.CommandText) 'This line is optional, I like having my queries "logged" someplace I can check for errors, for development purposes I use Debug.Print
         Return command.ExecuteNonQuery()
     End Function
@@ -63,7 +63,7 @@ Public Module commandHelpers
     ''' <param name="command">Command to use</param>
     ''' <returns>Datareader containing the retreived records</returns>
     Function ExecuteReader(ByVal command As MySqlCommand) As MySqlDataReader
-        command.CommandText = sql.parseToSQLServer(command.CommandText) 'Let's make the query compatible with SQL Server
+        'command.CommandText = sql.parseToSQLServer(command.CommandText) 'Let's make the query compatible with SQL Server
         logs.writeToLog(command.CommandText) 'This line is optional, I like having my queries "logged" someplace I can check for errors, for development purposes I use Debug.Print
         Return command.ExecuteReader
     End Function

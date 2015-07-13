@@ -57,7 +57,7 @@
     Public Const ERROR_DATABASE_PARAMETER_NOT_SET As String = "Los parametros de conexion no han sido configurados: "
 
     'SQL Server Error Messaged replacements
-    Public Const REPLACENULLFIELD As String = "No puede dejar el campo '$1' vacio"
+    Public Const REPLACENULLFIELD As String = "No puede dejar el campo '$1' vacío"
     Public Const REPLACEUNCLOSEDQUOTATION As String = "El valor ingresado tiene caracteres invalidos"
     Public Const REPLACEARITHMETICOVERFLOW As String = "Al menos uno de los valores ingresados es mayor al permitido."
     Public Const REPLACESTRINGTRUNCATED As String = "Ha ingresado un valor con una longitud mayor a la permitida"
@@ -136,6 +136,7 @@
     Public Const GF_DATE As String = "Fecha"
     Public Const GF_QUANTITY As String = "Cantidad"
     Public Const GF_AMOUNT As String = "Monto"
+    Public Const GF_CATEGORY As String = "Categoría"
     Public Const GF_PRICE As String = "Precio"
     Public Const GF_EXISTANCE As String = "Existencia"
     Public Const GF_BARCODE As String = "Código de Barras"
@@ -151,4 +152,8 @@
     Public Const GF_VALUE As String = "Valor"
     Public Const GF_NUMBER As String = "Número"
     Public Const GF_IS_ACTIVE As String = "Activo"
+    Public Const GF_ADD_USER As String = "Usuario Ingresa"
+    Public Const GF_ADD_DATE As String = "Fecha Ingresa"
+    Public Const GF_MODIFY_USER As String = "Usuario Modifica"
+    Public Const GF_MODIFY_DATE As String = "Fecha Modifica"
 End Module

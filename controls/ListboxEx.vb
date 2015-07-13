@@ -139,6 +139,7 @@ Public Class ListBoxEx
             If originalItems.Contains(item) Then
                 originalItems.Remove(item)
             Else
+                If Not saveQuery Is Nothing Then _
                 saveSQL.Add(saveQuery.Replace("@@id@@", item.id))
             End If
         Next
